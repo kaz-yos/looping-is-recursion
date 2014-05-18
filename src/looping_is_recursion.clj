@@ -96,8 +96,33 @@
 (ctest/is (= (find-first-index nil? [])                                    nil))
 
 
+;; Exercise 5
+;; Implement the function (avg a-seq) that computes the average of a sequence.
+;; Hint: You need to keep track of multiple things in the loop.
+;;
+;; signature: seq -> number
+;; purpose: return the average over the sequence
+;; stub
+;; (defn avg [a-seq]
+;;   -1)
+;;
 (defn avg [a-seq]
-  -1)
+  (if (empty? a-seq)
+    ;; Stop with nill if the sequence is empty to avoid error
+    nil
+    
+    (loop [sq    a-seq
+           sum   0
+           denom 0]
+      (if (empty? sq)
+        (/ sum denom)
+        (recur (rest sq) (+ sum (first sq)) (inc denom))))))
+;;
+(ctest/is (= (avg [])        nil))
+(ctest/is (= (avg [1 2 3])   2))
+(ctest/is (= (avg [0 0 0 4]) 1))
+(ctest/is (= (avg [1 0 0 1]) 1/2))
+
 
 (defn parity [a-seq]
   ":(")
