@@ -69,8 +69,32 @@
 (ctest/is (= (seq= [1 3 5] []))        false)
 
 
+;; Exercise 4
+;; Implement the function (find-first-index [predicate seq]) that returns the first index in seq for which predicate returns true, or nil if no such index exists.
+;;
+;; signature: pred, seq -> number
+;; purpose: return index for the first element in seq that give true by pred
+;; stub
 (defn find-first-index [pred a-seq]
-  ":(")
+  -1)
+;;
+(defn find-first-index [pred a-seq]
+  (loop [sq  a-seq
+         acc 0]
+    (cond
+     ;; two stop conditions
+     ;; no more elements
+     (empty? sq)       nil
+     ;; predicate returns true
+     (pred (first sq)) acc
+     ;; otherwise recur
+     :else             (recur (rest sq) (inc acc)))))
+;;
+(ctest/is (= (find-first-index zero? [1 1 1 0 3 7 0 2])                    3))
+(ctest/is (= (find-first-index zero? [1 1 3 7 2])                          nil))
+(ctest/is (= (find-first-index (fn [n] (= n 6)) [:cat :dog :six :blorg 6]) 4))
+(ctest/is (= (find-first-index nil? [])                                    nil))
+
 
 (defn avg [a-seq]
   -1)
