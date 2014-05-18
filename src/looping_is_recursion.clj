@@ -18,10 +18,10 @@
        (recur base (dec exp) (* acc base)))))
 ;;
 ;; testing by clojure.test test suit
-(ctest/is (= (power 2 2)   4))
-(ctest/is (= (power 5 3) 125))
-(ctest/is (= (power 7 0)   1))
-(ctest/is (= (power 0 10)  0))
+;; (ctest/is (= (power 2 2)   4))
+;; (ctest/is (= (power 5 3) 125))
+;; (ctest/is (= (power 7 0)   1))
+;; (ctest/is (= (power 0 10)  0))
 
 
 
@@ -40,9 +40,9 @@
     (first a-seq)
     (recur (rest a-seq))))
 ;;
-(ctest/is (= (last-element [])      nil))
-(ctest/is (= (last-element [1 2 3]) 3))
-(ctest/is (= (last-element [2 5])   5))
+;; (ctest/is (= (last-element [])      nil))
+;; (ctest/is (= (last-element [1 2 3]) 3))
+;; (ctest/is (= (last-element [2 5])   5))
 
 
 ;; Exercise 3
@@ -64,9 +64,9 @@
    ;; Otherwise recur
    :else                               (recur (rest seq1) (rest seq2))))
 ;;
-(ctest/is (= (seq= [1 2 4] '(1 2 4)))  true)
-(ctest/is (= (seq= [1 2 3] [1 2 3 4])) false)
-(ctest/is (= (seq= [1 3 5] []))        false)
+;; (ctest/is (= (seq= [1 2 4] '(1 2 4)))  true)
+;; (ctest/is (= (seq= [1 2 3] [1 2 3 4])) false)
+;; (ctest/is (= (seq= [1 3 5] []))        false)
 
 
 ;; Exercise 4
@@ -90,10 +90,10 @@
      ;; otherwise recur
      :else             (recur (rest sq) (inc acc)))))
 ;;
-(ctest/is (= (find-first-index zero? [1 1 1 0 3 7 0 2])                    3))
-(ctest/is (= (find-first-index zero? [1 1 3 7 2])                          nil))
-(ctest/is (= (find-first-index (fn [n] (= n 6)) [:cat :dog :six :blorg 6]) 4))
-(ctest/is (= (find-first-index nil? [])                                    nil))
+;; (ctest/is (= (find-first-index zero? [1 1 1 0 3 7 0 2])                    3))
+;; (ctest/is (= (find-first-index zero? [1 1 3 7 2])                          nil))
+;; (ctest/is (= (find-first-index (fn [n] (= n 6)) [:cat :dog :six :blorg 6]) 4))
+;; (ctest/is (= (find-first-index nil? [])                                    nil))
 
 
 ;; Exercise 5
@@ -118,10 +118,10 @@
         (/ sum denom)
         (recur (rest sq) (+ sum (first sq)) (inc denom))))))
 ;;
-(ctest/is (= (avg [])        nil))
-(ctest/is (= (avg [1 2 3])   2))
-(ctest/is (= (avg [0 0 0 4]) 1))
-(ctest/is (= (avg [1 0 0 1]) 1/2))
+;; (ctest/is (= (avg [])        nil))
+;; (ctest/is (= (avg [1 2 3])   2))
+;; (ctest/is (= (avg [0 0 0 4]) 1))
+;; (ctest/is (= (avg [1 0 0 1]) 1/2))
 
 ;; Exercise 6
 ;; Write the function (parity a-seq) that takes in a sequence and returns a set of those elements that occur an odd number of times in the sequence.
@@ -152,9 +152,9 @@
         (recur (rest sq) (toggle acc (first sq)))))))
 
 ;;
-(ctest/is (= (parity [:a :b :c])            #{:a :b :c}))
-(ctest/is (= (parity [:a :b :c :a])         #{:b :c}))
-(ctest/is (= (parity [1 1 2 1 2 3 1 2 3 4]) #{2 4}))
+;; (ctest/is (= (parity [:a :b :c])            #{:a :b :c}))
+;; (ctest/is (= (parity [:a :b :c :a])         #{:b :c}))
+;; (ctest/is (= (parity [1 1 2 1 2 3 1 2 3 4]) #{2 4}))
 
 
 ;; Exercise 7
@@ -187,13 +187,13 @@
              (recur Fn-1 Fn (+ Fn-1 Fn) (inc i))))))
 
 ;;
-(ctest/is (= (fast-fibo 0) 0))
-(ctest/is (= (fast-fibo 1) 1))
-(ctest/is (= (fast-fibo 2) 1))
-(ctest/is (= (fast-fibo 3) 2))
-(ctest/is (= (fast-fibo 4) 3))
-(ctest/is (= (fast-fibo 5) 5))
-(ctest/is (= (fast-fibo 6) 8))
+;; (ctest/is (= (fast-fibo 0) 0))
+;; (ctest/is (= (fast-fibo 1) 1))
+;; (ctest/is (= (fast-fibo 2) 1))
+;; (ctest/is (= (fast-fibo 3) 2))
+;; (ctest/is (= (fast-fibo 4) 3))
+;; (ctest/is (= (fast-fibo 5) 5))
+;; (ctest/is (= (fast-fibo 6) 8))
 
 
 ;; Exercise 8
@@ -223,7 +223,7 @@
        ;; Otherwise
        :else                             (recur (rest sq) (conj acc fst-elt) (conj rep-check-set fst-elt))))))
 ;;
-(ctest/is (= (cut-at-repetition [1 1 1 1 1]) [1]))
-(ctest/is (= (cut-at-repetition [:cat :dog :house :milk 1 :cat :dog]) [:cat :dog :house :milk 1]))
-(ctest/is (= (cut-at-repetition [0 1 2 3 4 5]) [0 1 2 3 4 5]))
+;; (ctest/is (= (cut-at-repetition [1 1 1 1 1]) [1]))
+;; (ctest/is (= (cut-at-repetition [:cat :dog :house :milk 1 :cat :dog]) [:cat :dog :house :milk 1]))
+;; (ctest/is (= (cut-at-repetition [0 1 2 3 4 5]) [0 1 2 3 4 5]))
 
