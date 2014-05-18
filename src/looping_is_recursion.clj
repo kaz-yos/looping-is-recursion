@@ -123,13 +123,107 @@
 (ctest/is (= (avg [0 0 0 4]) 1))
 (ctest/is (= (avg [1 0 0 1]) 1/2))
 
-
+;; Exercise 6
+;; Write the function (parity a-seq) that takes in a sequence and returns a set of those elements that occur an odd number of times in the sequence.
+;; Hint: Recall the fuction (toggle set elem) from Structured data
+;; (toggle #{1 2 3} 1) ;=> #{2 3}
+;; (toggle #{2 3} 1) ;=> #{1 2 3}
+;;
+;; sig: seq -> set
+;; purpose: return elements that occur an odd number of times
+;; stub:
+;; (defn parity [a-seq]
+;;   #{:-});; ;; 
+;;
 (defn parity [a-seq]
-  ":(")
+  ;; define toggle function locally
+  (let [toggle (fn [a-set elem]
+                 (if (contains? a-set elem)
+                   (disj a-set elem)
+                   (conj a-set elem)))]
+    ;; loop with set-type accumulator
+    (loop [sq  a-seq
+           acc #{}]
+      
+      (if (empty? sq)
+        ;; end if no element left
+        acc
+        ;; recur toggling the current element in/out the acc
+        (recur (rest sq) (toggle acc (first sq)))))))
 
+;;
+(ctest/is (= (parity [:a :b :c])            #{:a :b :c}))
+(ctest/is (= (parity [:a :b :c :a])         #{:b :c}))
+(ctest/is (= (parity [1 1 2 1 2 3 1 2 3 4]) #{2 4}))
+
+
+;; Exercise 7
+;; Write the function (fast-fibo n) that computes the nth fibonacci number using loop and recur. Do not use recursion.
+;; Hint: to avoid recursion, you need to keep track of Fn−1 and Fn in the loop.
+;;
+;; sig: number -> number
+;; purpose return nth fibonacci number
+;; stub:
+;; (defn fast-fibo [n]
+;;   -1)
+;;
 (defn fast-fibo [n]
-  ":(")
+  (cond
+   ;; Return value directly for those
+   (<= n 0) 0
+   (=  n 1) 1
+   (=  n 2) 1
+   
+   ;; Otherwise recur
+   :else (loop [Fn-2 1
+                Fn-1 1
+                Fn   2
+                i    3] ; First step is at 3
+           ;; Check iteration reached the target n
+           (if (= i n)
+             ;; if true, return the current fibonacci
+             Fn
+             ;; Otherwise, move one step
+             (recur Fn-1 Fn (+ Fn-1 Fn) (inc i))))))
 
+;;
+(ctest/is (= (fast-fibo 0) 0))
+(ctest/is (= (fast-fibo 1) 1))
+(ctest/is (= (fast-fibo 2) 1))
+(ctest/is (= (fast-fibo 3) 2))
+(ctest/is (= (fast-fibo 4) 3))
+(ctest/is (= (fast-fibo 5) 5))
+(ctest/is (= (fast-fibo 6) 8))
+
+
+;; Exercise 8
+;; Write the function (cut-at-repetition a-seq) that takes in a sequence and returns elements from the sequence up to the first repetition.
+;; Hint: Remember that conjing onto a vector appends the element.
+;; Hint: A set might be helpful
+;;
+;; sig: seq -> seq
+;; purpose: end at first repetition
+;; stub:
+;; (defn cut-at-repetition [a-seq]
+;;   [":("])
+;;
 (defn cut-at-repetition [a-seq]
-  [":("])
+  (loop [sq            a-seq
+         acc           []
+         rep-check-set #{}]
+    ;;
+    (let [fst-elt (first sq)]
+      ;;
+      (cond
+       ;; stop conditions
+       ;; Nothing left
+       (empty? sq)                       acc
+       ;; Duplication detected
+       (contains? rep-check-set fst-elt) acc
+       ;; Otherwise
+       :else                             (recur (rest sq) (conj acc fst-elt) (conj rep-check-set fst-elt))))))
+;;
+(ctest/is (= (cut-at-repetition [1 1 1 1 1]) [1]))
+(ctest/is (= (cut-at-repetition [:cat :dog :house :milk 1 :cat :dog]) [:cat :dog :house :milk 1]))
+(ctest/is (= (cut-at-repetition [0 1 2 3 4 5]) [0 1 2 3 4 5]))
 
